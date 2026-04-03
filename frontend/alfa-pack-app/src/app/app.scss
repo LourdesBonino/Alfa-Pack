@@ -1,0 +1,80 @@
+.contenedor-principal {
+  display: flex;
+  flex-direction: column; 
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.alfa-header {
+  // 1. AUMENTAMOS LA ALTURA DEL CABEZAL (de 70px a 110px)
+  height: 110px; 
+  background: #0040A0; // Azul Alfa Pack
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 40px; // Más aire a los costados
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); // Sombra más pronunciada
+  z-index: 100;
+  position: relative; // Importante para el z-index
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 100%; // Que ocupe todo el alto del header
+    
+    // 2. HACEMOS EL LOGO MUCHO MÁS GRANDE
+    .logo-superior { 
+      height: 80px; // <--- ANTES ERA 45px. ¡Casi el doble!
+      width: auto; // Mantiene la proporción
+      filter: brightness(0) invert(1); // Logo en blanco
+      transition: all 0.3s ease; // Efecto suave al cargar
+      
+      &:hover {
+        transform: scale(1.05); // Pequeño efecto al pasar el mouse
+      }
+    }
+
+    .user-info {
+      font-size: 1.1rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+  }
+}
+
+.cuerpo-app {
+  display: flex; 
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar-fijo {
+  width: 250px;
+  background-color: #2d3748; // Gris oscuro profesional
+  color: white;
+  height: 100%;
+  flex-shrink: 0;
+  border-right: 1px solid #1a202c;
+}
+
+.zona-trabajo {
+  flex: 1;
+  background-color: #f7fafc;
+  overflow-y: auto;
+  padding: 40px;
+  display: flex;
+  justify-content: center; // Centra la "Carta" de buscar cliente
+}
+
+.contenedor-interior {
+  width: 100%;
+  max-width: 1000px; // Evita que el formulario se estire demasiado
+}
+.logo-superior {
+  height: 180px; 
+  filter: brightness(0) invert(1); // Mantiene el logo blanco sobre el azul
+  margin-left: 10px;
+}

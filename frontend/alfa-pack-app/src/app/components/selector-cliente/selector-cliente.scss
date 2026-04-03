@@ -1,0 +1,139 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 1rem;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f4f7f6; 
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.alfa-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Sombra suave para que "flote" */
+  border: 1px solid #e2e8f0;
+  // --- 1. ENCABEZADO FIJO (No se mueve) ---
+  .header-container {
+    padding: 20px 25px 5px 25px; // Padding reducido para ganar espacio
+    flex-shrink: 0; 
+    
+    .alfa-title {
+    color: #0040A0; /* El azul de Alfa Pack */
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+}
+    .subtitle {
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-top: 8px;
+      background: #f0f4ff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 5px solid #0040A0;
+      text-align: center;
+      strong { color: #0040A0; }
+    }
+  }
+
+  // --- 2. ZONA DE SCROLL (Contenido dinámico) ---
+  .scroll-container {
+    padding: 10px 25px; 
+    overflow-y: auto;
+    flex-grow: 1; 
+
+    &::-webkit-scrollbar { width: 6px; }
+    &::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
+  }
+
+  // --- 3. BOTONES FIJOS ABAJO ---
+  .actions {
+    padding: 12px 25px 20px 25px;
+    flex-shrink: 0;
+    background: white;
+    border-top: 1px solid #edf2f7;
+    display: flex;
+    gap: 12px;
+  }
+
+// --- ORGANIZACIÓN DE CAMPOS ---
+
+.row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: nowrap; // Forzamos 2 columnas en el ancho de la tarjeta
+  margin-bottom: 0.2rem;
+}
+
+.field {
+  flex: 1;
+  min-width: 0; // Permite que flex-grow funcione correctamente en 2 columnas
+  margin-bottom: 0.8rem; // Espacio vertical más compacto
+  
+  label { 
+    display: block; 
+    margin-bottom: 4px; 
+    font-size: 0.75rem; // Fuente más pequeña para etiquetas
+    font-weight: 700; 
+    color: #4a5568; 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.alfa-input {
+  width: 100%;
+  padding: 10px 12px; // Inputs más delgados para ahorrar alto
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  
+  &:focus {
+    outline: none;
+    border-color: #0040A0;
+  }
+}
+
+.price-input-wrapper {
+  position: relative;
+  .currency-symbol {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    color: #2d3748; font-weight: 700;
+  }
+  .price-input { padding-left: 30px; font-weight: 700; }
+}
+
+textarea.alfa-input {
+  min-height: 60px; // Más bajo para que entre todo
+  resize: none;
+}
+
+// --- BOTONES ---
+
+.btn-primary, .btn-secondary { 
+  flex: 1;
+  padding: 12px; 
+  border-radius: 8px; 
+  border: none; 
+  font-weight: 700; 
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary { background: #0040A0; color: white; &:hover { background: #003380; } }
+.btn-secondary { background: #edf2f7; color: #4a5568; &:hover { background: #e2e8f0; } }
+
+// Resultados de búsqueda
+.results-list {
+  list-style: none; padding: 0; margin-top: 10px; border-radius: 8px;
+  li {
+    padding: 10px 15px; display: flex; justify-content: space-between;
+    cursor: pointer; border-bottom: 1px solid #f7fafc;
+    &:hover { background: #f0f4ff; }
+  }
+}

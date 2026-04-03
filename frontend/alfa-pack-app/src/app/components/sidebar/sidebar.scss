@@ -1,0 +1,36 @@
+.menu-lateral {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column; // ESTO los pone uno abajo del otro
+  gap: 10px; // Espacio entre botones
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: #cbd5e0; // Gris claro para que resalte en el fondo oscuro
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+
+  &:hover {
+    background-color: #3d4b64;
+    color: white;
+    border-left-color: #ED1C24; // El toque rojo de Alfa Pack
+  }
+
+  &.active {
+    background-color: #1a202c;
+    color: white;
+    border-left-color: #0040A0; // El azul cuando está seleccionado
+  }
+
+  .icon {
+    margin-right: 12px;
+    font-size: 1.2rem;
+  }
+}

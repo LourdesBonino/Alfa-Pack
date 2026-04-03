@@ -1,0 +1,130 @@
+<div class="alfa-card">
+  
+  <div class="header-container">
+    <h3 class="alfa-title">
+      {{ !clienteSeleccionado ? 'Buscar Cliente' : 'Nueva Carga' }}
+    </h3>
+    <div class="subtitle" *ngIf="clienteSeleccionado">
+      Cliente: <strong>{{ clienteSeleccionado.nombre_razon_social }}</strong>
+    </div>
+  </div>
+
+  <div class="scroll-container">
+    
+    <div *ngIf="!clienteSeleccionado" class="search-section">
+      <div class="input-group">
+        <input type="text" [(ngModel)]="termino" (input)="buscar()" placeholder="Nombre del cliente..." class="alfa-input">
+        <span class="search-icon"></span>
+      </div>
+      <ul class="results-list" *ngIf="resultados.length > 0">
+        <li *ngFor="let c of resultados" (click)="seleccionar(c)">
+          <div class="client-info">
+            <span class="client-name">{{ c.nombre_razon_social }}</span>
+            <span class="client-dni">DNI/CUIT: {{ c.dni_cuit }}</span>
+          </div>
+          <span class="select-arrow">→</span>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="clienteSeleccionado" class="shipment-form">
+      
+      <div class="row">
+        <div class="field">
+          <label>Tipo de Recorrido</label>
+          <select [(ngModel)]="tipoEnvio" class="alfa-input">
+            <option value="A">Camino A - Destino</option>
+            <option value="B">Camino B - Retiro</option>
+            <option value="C">Camino C - C. Reembolso</option>
+          </select>
+        </div>
+        <div class="field" *ngIf="tipoEnvio === 'A'">
+          <label>Persona Destino</label>
+          <input type="text" [(ngModel)]="destinatarioPersona" class="alfa-input" placeholder="Nombre...">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Dirección de Entrega/Retiro</label>
+        <input type="text" [(ngModel)]="direccionEnvio" class="alfa-input" placeholder="Calle, Nro, Localidad...">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Bultos</label>
+          <input type="number" [(ngModel)]="bultos" class="alfa-input" min="1">
+        </div>
+        <div class="field">
+          <label>Precio ($)</label>
+          <div class="price-input-wrapper">
+            <span class="currency-symbol">$</span>
+            <input type="number" [(ngModel)]="precio" class="alfa-input price-input" placeholder="0.00">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Fecha del Recorrido</label>
+          <input type="date" class="alfa-input" [(ngModel)]="fechaRecorrido">
+        </div>
+        <div class="field">
+          <label>Forma de Pago</label>
+          <select [(ngModel)]="formaPago" class="alfa-input">
+            <option *ngFor="let opcion of opcionesPago" [value]="opcion">{{opcion}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Observaciones</label>
+        <textarea [(ngModel)]="observaciones" class="alfa-input compact-textarea" placeholder="Ej: Frágil..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions" *ngIf="clienteSeleccionado">
+    <button (click)="cancelar()" class="btn-secondary">Cancelar</button>
+    <button (click)="confirmarEnvio()" class="btn-primary">Registrar e Imprimir</button>
+  </div>
+</div>
+
+<div id="seccion-impresion" style="display: none;">
+  <div class="hoja-a4" style="padding: 2cm; font-family: Arial, sans-serif;">
+    <div style="border: 2px solid #000; padding: 15px; width: 10cm; margin-bottom: 50px; border-radius: 10px;">
+      <h2 style="margin: 0; border-bottom: 1px solid #000; text-align: center;">ALFA PACK</h2>
+      <p><strong>DESTINATARIO:</strong> {{ destinatarioPersona || '---' }}</p>
+      <p><strong>DIRECCIÓN:</strong> {{ direccionEnvio }}</p>
+      <p style="text-align: right; font-size: 0.8rem;">Bultos: {{ bultos }} | Fecha: {{ fechaRecorrido | date:'dd/MM' }}</p>
+    </div>
+
+    <div style="border: 1px solid #333; padding: 20px;">
+      <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #0040A0;">
+        <div>
+          <h1 style="color: #0040A0; margin: 0;">ALFA PACK</h1>
+          <small>Transporte & Logística</small>
+        </div>
+        <div style="text-align: right;">
+          <p><strong>REMITO DE CARGA</strong></p>
+        </div>
+      </div>
+      <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Remitente:</strong> {{ clienteSeleccionado?.nombre_razon_social }}</td>
+          <td style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Fecha:</strong> {{ fechaRecorrido | date:'dd/MM/yyyy' }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 10px; border-bottom: 1px solid #eee;"><strong>Dirección:</strong> {{ direccionEnvio }}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px;"><strong>Servicio:</strong> Camino {{ tipoEnvio }} ({{ bultos }} bultos)</td>
+          <td style="padding: 10px;"><strong>Pago:</strong> {{ formaPago }} ($ {{ precio }})</td>
+        </tr>
+      </table>
+      <div style="margin-top: 60px; display: flex; justify-content: space-between;">
+        <div style="border-top: 1px solid #000; width: 40%; text-align: center;">Firma Cliente</div>
+        <div style="border-top: 1px solid #000; width: 40%; text-align: center;">Aclaración</div>
+      </div>
+    </div>
+  </div>
+</div>

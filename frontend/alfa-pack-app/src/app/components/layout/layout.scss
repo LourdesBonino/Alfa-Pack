@@ -1,0 +1,71 @@
+.pantalla-completa {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.alfa-header {
+  position: relative;
+  width: 100%;
+  height: 110px; // Altura para que luzca el diseño
+  background-color: white;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+}
+
+.fondo-ondas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto; // Mantiene la proporción de la onda
+  z-index: 1;
+}
+
+.header-overlay {
+  position: relative;
+  z-index: 2; // Por encima de las ondas
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 40px;
+}
+
+.logo-superior {
+  height: 85px; // Ajustalo a tu gusto
+  width: auto;
+}
+
+.icono-svg {
+  width: 20px;
+  height: 20px;
+  fill: #0040A0; // El azul oficial de Alfa Pack
+  transition: transform 0.2s;
+}
+
+.boton-volver:hover .icono-svg {
+  transform: translateX(-3px); // Un efectito de movimiento al pasar el mouse
+}
+
+.cuerpo-sistema {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar-gris {
+  width: 260px;
+  background-color: #E0E0E0; // El gris de tu captura
+  border-right: 1px solid #ccc;
+}
+
+.contenido-principal {
+  flex: 1;
+  background-color: #f8f9fa;
+  padding: 25px;
+}
+app-sidebar {
+  display: block;
+  background-color: #f8f9fa; // Gris claro
+  border-right: 1px solid #dee2e6;
+}
