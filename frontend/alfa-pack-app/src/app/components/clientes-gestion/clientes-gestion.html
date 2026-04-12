@@ -1,36 +1,78 @@
 <div class="alfa-card-gestion">
-    <div class="header-gestion">
-        <h2 class="alfa-title">Gestión de Clientes</h2>
-        <button class="btn-primary" (click)="abrirModalNuevo()">+ Nuevo Cliente</button>
+  <div class="header-gestion">
+    <h2 class="alfa-title">Gestión de Clientes</h2>
+    <button class="btn-primary" (click)="abrirModalNuevo()">+ Nuevo Cliente</button>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="filtro" (input)="filtrar()" placeholder="Buscar por nombre o CUIT..." class="alfa-input">
+  </div>
+
+  <div class="tabla-contenedor">
+    <table class="alfa-tabla">
+      <thead>
+        <tr>
+          <th>Nombre / Razón Social</th>
+          <th>DNI / CUIT</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientesFiltrados">
+          <td><strong>{{ cliente.nombre_razon_social }}</strong></td>
+          <td>{{ cliente.dni_cuit }}</td>
+          <td>{{ cliente.direccion }} {{ cliente.localidad }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td class="acciones-td">
+            <button class="btn-edit" (click)="editar(cliente)" title="Editar">✏️</button>
+            <button class="btn-resumen" (click)="verResumen(cliente)" title="Generar Resumen">📑 Resumen</button>
+            <button class="btn-delete" (click)="eliminar(cliente.id)" title="Eliminar Cliente">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="alfa-modal-overlay" *ngIf="mostrarModal">
+  <div class="alfa-modal">
+    <div class="modal-header">
+      <h3>{{ editando ? 'Editar Cliente' : 'Nuevo Cliente' }}</h3>
+      <button class="btn-close" (click)="cerrarModal()">×</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="alfa-form-group">
+        <label>Nombre / Razón Social</label>
+        <input type="text" [(ngModel)]="clienteForm.nombre_razon_social" class="alfa-input-modal">
+      </div>
+      <div class="alfa-form-row">
+        <div class="alfa-form-group">
+          <label>DNI / CUIT</label>
+          <input type="text" [(ngModel)]="clienteForm.dni_cuit" class="alfa-input-modal">
+        </div>
+        <div class="alfa-form-group">
+          <label>Teléfono</label>
+          <input type="text" [(ngModel)]="clienteForm.telefono" class="alfa-input-modal">
+        </div>
+      </div>
+      <div class="alfa-form-group">
+        <label>Dirección</label>
+        <input type="text" [(ngModel)]="clienteForm.direccion" class="alfa-input-modal">
+      </div>
+      <div class="alfa-form-group">
+        <label>Localidad</label>
+        <input type="text" [(ngModel)]="clienteForm.localidad" class="alfa-input-modal">
+      </div>
     </div>
 
-    <div class="search-bar">
-        <input type="text" [(ngModel)]="filtro" (input)="filtrar()" placeholder="Buscar por nombre o CUIT..." class="alfa-input">
+    <div class="modal-footer">
+      <button class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+      <button class="btn-guardar" (click)="guardar()">
+        {{ editando ? 'Actualizar Datos' : 'Registrar Cliente' }}
+      </button>
     </div>
-
-    <div class="tabla-contenedor">
-        <table class="alfa-tabla">
-        <thead>
-            <tr>
-            <th>Nombre / Razón Social</th>
-            <th>DNI / CUIT</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let cliente of clientesFiltrados">
-            <td><strong>{{ cliente.nombre_razon_social }}</strong></td>
-            <td>{{ cliente.dni_cuit }}</td>
-            <td>{{ cliente.direccion }}, {{ cliente.localidad }}</td>
-            <td>{{ cliente.telefono }}</td>
-            <td class="acciones-td">
-                <button class="btn-edit" (click)="editar(cliente)">✏️</button>
-                <button class="btn-delete" (click)="borrar(cliente.id)">🗑️</button>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </div>
+  </div>
 </div>
