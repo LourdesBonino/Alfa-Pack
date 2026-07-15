@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #1e293b;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.2s ease-in-out forwards;
+}
+
+/* Clases de Estilo de la Marca - Formales */
+.brand-primary-text {
+    color: #1a4f9c; /* Azul formal de la marca */
+}
+
+.brand-primary-bg {
+    background-color: #1a4f9c;
+}
+
+.brand-accent-bg {
+    background-color: #d11222; /* Rojo vibrante de la marca */
+    color: #ffffff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.brand-accent-bg:hover {
+    background-color: #a80f1c;
+}
+
+.brand-sidebar-bg {
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+}
+
+.brand-header-bg {
+    background-color: #ffffff; /* Fondo blanco para que el logo resalte */
+    border-top: 4px solid #1a4f9c; /* El toque de azul en el encabezado */
+    border-bottom: 1px solid #e2e8f0;
+    color: #0f172a;
+}
+
+/* Estilo para los inputs - Estilo Enterprise */
+.brand-input {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    transition: all 0.2s ease;
+    border-radius: 4px; /* Bordes menos redondeados, más serios */
+}
+
+.brand-input:focus {
+    border-color: #1a4f9c;
+    box-shadow: 0 0 0 1px #1a4f9c;
+    outline: none;
+}
+
+/* Tablas formales */
+.brand-table-header {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Personalización de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
