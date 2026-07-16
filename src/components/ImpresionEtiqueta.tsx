@@ -36,8 +36,8 @@ export const ImpresionEtiqueta: React.FC<Props> = ({ cliente, pedido, onClose })
             <style type="text/css" media="print">
                 {`
                     @page {
-                        size: 100mm 150mm;
-                        margin: 0;
+                        size: A4;
+                        margin: 5mm;
                     }
                     body {
                         margin: 0;
@@ -47,7 +47,7 @@ export const ImpresionEtiqueta: React.FC<Props> = ({ cliente, pedido, onClose })
                 `}
             </style>
             <div className="hidden print:flex print:w-full print:bg-white text-black bg-white justify-center">
-                <div className="block w-[100mm]">
+                <div className="flex flex-wrap gap-2 w-full max-w-[210mm] justify-start content-start">
                     {Array.from({ length: bultos }).map((_, index) => {
                         const shortId = String(pedido.id || '00000000').split('-')[0].toUpperCase();
                         const bultoText = bultos > 1 ? `BULTO ${index + 1} DE ${bultos}` : `BULTO 1 DE 1`;
@@ -61,7 +61,7 @@ export const ImpresionEtiqueta: React.FC<Props> = ({ cliente, pedido, onClose })
                         const condicion = (pedido.condicion || '').replace('_', ' ').toUpperCase();
 
                         return (
-                            <div key={index} className="relative print:m-0 box-border inline-block align-top overflow-hidden" style={{ pageBreakAfter: index < bultos - 1 ? 'always' : 'auto', pageBreakInside: 'avoid', width: '100mm', height: '150mm', padding: '2mm' }}>
+                            <div key={index} className="relative print:m-0 box-border inline-block align-top overflow-hidden" style={{ pageBreakInside: 'avoid', width: '96mm', height: '140mm', padding: '1mm' }}>
                                 <div className="border-[3px] border-black font-sans bg-white h-full w-full flex flex-col mb-0 box-border p-3 overflow-hidden">
                                     
                                     {/* Header */}
