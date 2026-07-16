@@ -26,9 +26,9 @@ export const EstadoDeCuentas = () =>{
                     monto_abonado,
                     forma_cobro,
                     cliente_id,
-                    clientes!cliente_id (id, nombre_razon_social, localidad),
+                    clientes!pedidos_cliente_id_fkey (id, nombre_razon_social, localidad),
                     destinatario_id,
-                    destinatario_clientes:clientes!destinatario_id (id, nombre_razon_social, localidad)
+                    destinatario_clientes:clientes!pedidos_destinatario_id_fkey (id, nombre_razon_social, localidad)
                 `)
                 .or('forma_cobro.eq.cuenta_corriente,forma_cobro.eq.cuenta_corriente_destino')
                 .eq('abonado', false);

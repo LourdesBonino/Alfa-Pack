@@ -229,14 +229,14 @@ export const FormularioPedido = () =>{
                                     className="accent-[#0046b0] w-4 h-4"
                                 /><span className="text-sm font-semibold text-slate-700">{condicion === 'retirar' ? "Abona al generar envío" : 
                                      condicion === 'entregar' ? "Paga Remitente (Efectivo)" : 
-                                     "Paga Remitente (Origen)"}</span></label>{condicion !== 'retirar' && (<label className="flex items-center gap-2 cursor-pointer"><input 
+                                     "Paga Remitente (Origen)"}</span></label><label className="flex items-center gap-2 cursor-pointer"><input 
                                         type="radio" 
                                         name="formaCobro" 
                                         value="cuenta_corriente"
                                         checked={formaCobro === 'cuenta_corriente'}
                                         onChange={(e) =>setFormaCobro(e.target.value as FormaCobro)}
                                         className="accent-[#0046b0] w-4 h-4"
-                                    /><span className="text-sm font-semibold text-slate-700">{condicion === 'entregar' ? "Paga Remitente (Cta Cte)" : "Cuenta Corriente"}</span></label>)}<label className="flex items-center gap-2 cursor-pointer"><input 
+                                    /><span className="text-sm font-semibold text-slate-700">{condicion === 'entregar' ? "Paga Remitente (Cta Cte)" : "Cuenta Corriente"}</span></label><label className="flex items-center gap-2 cursor-pointer"><input 
                                     type="radio" 
                                     name="formaCobro" 
                                     value="destino"

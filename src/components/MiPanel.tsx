@@ -37,7 +37,7 @@ export const MiPanel = ({ onNavigate }: Props) =>{
         setCargando(true);
         const { data, error } = await supabase
             .from('pedidos')
-            .select('*, clientes!cliente_id(*)')
+            .select('*, clientes!pedidos_cliente_id_fkey(*)')
             .not('estado', 'in', '("finalizado_efectivo","finalizado_cuenta_corriente","finalizado_rendido","cancelado","pospuesto")')
             .eq('fecha_ejecucion', fechaFiltro)
             .order('created_at', { ascending: true });

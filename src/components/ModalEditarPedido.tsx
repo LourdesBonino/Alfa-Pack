@@ -16,6 +16,8 @@ export const ModalEditarPedido = ({ pedido, onClose, onGuardado }: Props) =>{
     const [condicion, setCondicion] = useState<CondicionPedido>(pedido.condicion);
     const [fechaEjecucion, setFechaEjecucion] = useState(pedido.fecha_ejecucion || '');
     const [estado, setEstado] = useState<EstadoPedido>(pedido.estado);
+    const [abonado, setAbonado] = useState(pedido.abonado || false);
+    const [montoAbonado, setMontoAbonado] = useState(pedido.monto_abonado || 0);
     const [cantidadBultos, setCantidadBultos] = useState(pedido.cantidad_bultos || 1);
     const [observaciones, setObservaciones] = useState(pedido.observaciones || '');
     const [retiroEnSucursal, setRetiroEnSucursal] = useState(pedido.retiro_en_sucursal || false);
@@ -43,6 +45,8 @@ export const ModalEditarPedido = ({ pedido, onClose, onGuardado }: Props) =>{
             condicion: condicion,
             fecha_ejecucion: fechaEjecucion,
             estado: estado,
+            abonado: abonado,
+            monto_abonado: abonado ? precioEnvio : 0,
             cantidad_bultos: cantidadBultos,
             observaciones: observaciones,
             retiro_en_sucursal: condicion !== 'entregar' ? retiroEnSucursal : false,
@@ -109,7 +113,18 @@ export const ModalEditarPedido = ({ pedido, onClose, onGuardado }: Props) =>{
                                 value={estado}
                                 onChange={(e) =>setEstado(e.target.value as EstadoPedido)}
                                 className="brand-input px-3 py-2 rounded-lg w-full font-semibold"
-                            ><option value="programado">Programado</option><option value="pendiente_retiro">Pendiente de Retiro</option><option value="retirado">Retirado</option><option value="en_viaje">En Viaje</option><option value="en_destino">En Destino</option><option value="entregado">Entregado</option><option value="en_proceso_de_reembolso">En Proceso Reembolso</option><option value="en_viaje_reembolso">En Viaje Reembolso</option><option value="finalizado_efectivo">Finalizado (Efectivo)</option><option value="finalizado_cuenta_corriente">Finalizado (Cta Cte)</option><option value="finalizado_rendido">Finalizado (Rendido)</option><option value="cancelado">Cancelado</option><option value="pospuesto">Pospuesto</option></select></div></div><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{condicion !== 'entregar' && (<div className="bg-slate-50 p-3 rounded-xl border border-slate-200"><label className="flex items-center gap-2 mb-2 font-bold text-sm text-slate-700"><input 
+                            ><option value="programado">Programado</option><option value="pendiente_retiro">Pendiente de Retiro</option><option value="retirado">Retirado</option><option value="en_viaje">En Viaje</option><option value="en_destino">En Destino</option><option value="entregado">Entregado</option><option value="en_proceso_de_reembolso">En Proceso Reembolso</option><option value="en_viaje_reembolso">En Viaje Reembolso</option><option value="finalizado_efectivo">Finalizado (Efectivo)</option><option value="finalizado_cuenta_corriente">Finalizado (Cta Cte)</option><option value="finalizado_rendido">Finalizado (Rendido)</option><option value="cancelado">Cancelado</option><option value="pospuesto">Pospuesto</option></select></div></div><div className="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label className="text-xs font-bold text-slate-500 uppercase block mb-1">Pagado en su totalidad</label><select 
+                                value={abonado ? 'si' : 'no'}
+                                onChange={(e) =>setAbonado(e.target.value === 'si')}
+                                className="brand-input px-3 py-2 rounded-lg w-full font-semibold"
+                            ><option value="no">No (Pendiente/Deuda)</option><option value="si">Sí (Abonado)</option></select></div><div><label className="text-xs font-bold text-slate-500 uppercase block mb-1">Monto Abonado ($)</label><input 
+                                type="number" 
+                                step="0.01"
+                                min="0"
+                                value={montoAbonado}
+                                onChange={(e) =>setMontoAbonado(Number(e.target.value))}
+                                className="brand-input px-3 py-2 rounded-lg w-full font-semibold"
+                            /></div></div><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{condicion !== 'entregar' && (<div className="bg-slate-50 p-3 rounded-xl border border-slate-200"><label className="flex items-center gap-2 mb-2 font-bold text-sm text-slate-700"><input 
                                         type="checkbox" 
                                         checked={retiroEnSucursal}
                                         onChange={(e) =>setRetiroEnSucursal(e.target.checked)}
